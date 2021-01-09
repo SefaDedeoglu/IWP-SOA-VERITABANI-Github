@@ -1,2 +1,2 @@
 # IWP-SOA-VERITABANI-Github
-7 Ocak
+Soru-Cevap web sitesi .
