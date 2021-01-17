@@ -2,6 +2,7 @@
 @{
     Layout = null;
 }
+@model IWP_SOA_VERITABANI.SqlModel.Cevaplar
 
 <!DOCTYPE html>
 
@@ -11,13 +12,13 @@
     <title>Add</title>
     <script type="text/javascript">
         function bekle(){
-    window.location.href = "/deneme/deneme/index";
+    window.location.href = "/deneme/deneme/soru/@Model.soruID";
         }
     </script>
 </head>
-<body onload="setTimeout('bekle()',3000)">
-    <div> 
-        <h2>Sorunuz gönderilmiştir.. 3 saniye içinde ana sayfaya yönlendiriliyorsunuz</h2>
+<body onload="setTimeout('bekle()',1500)">
+    <div>
+        <h2>Yanıtınız gönderilmiştir.. 2 saniye içinde ana sayfaya yönlendiriliyorsunuz</h2>
     </div>
 </body>
 </html>

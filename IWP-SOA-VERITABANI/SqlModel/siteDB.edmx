@@ -38,6 +38,17 @@
           <Property Name="kategoriAdet" Type="int" />
           <Property Name="kategoriResim" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciID" />
+          </Key>
+          <Property Name="kullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAd" Type="nvarchar" MaxLength="150" />
+          <Property Name="KullaniciMail" Type="nvarchar(max)" />
+          <Property Name="KullaniciPW" Type="nvarchar" MaxLength="500" />
+          <Property Name="soruID" Type="int" />
+          <Property Name="cevapID" Type="int" />
+        </EntityType>
         <EntityType Name="Sorular">
           <Key>
             <PropertyRef Name="soruID" />
@@ -83,6 +94,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Kullanici_Cevaplar">
+          <End Role="Cevaplar" Type="Self.Cevaplar" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cevaplar">
+              <PropertyRef Name="cevapID" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="cevapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanici_Sorular">
+          <End Role="Sorular" Type="Self.Sorular" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sorular">
+              <PropertyRef Name="soruID" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="soruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sorular_Kategori">
           <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
           <End Role="Sorular" Type="Self.Sorular" Multiplicity="*" />
@@ -99,12 +134,21 @@
           <EntitySet Name="Cevaplar" EntityType="Self.Cevaplar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iletisim" EntityType="Self.iletisim" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sorular" EntityType="Self.Sorular" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cevaplar_Sorular" Association="Self.FK_Cevaplar_Sorular">
             <End Role="Sorular" EntitySet="Sorular" />
             <End Role="Cevaplar" EntitySet="Cevaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Cevaplar" Association="Self.FK_Kullanici_Cevaplar">
+            <End Role="Cevaplar" EntitySet="Cevaplar" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Sorular" Association="Self.FK_Kullanici_Sorular">
+            <End Role="Sorular" EntitySet="Sorular" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
           </AssociationSet>
           <AssociationSet Name="FK_Sorular_Kategori" Association="Self.FK_Sorular_Kategori">
             <End Role="Kategori" EntitySet="Kategori" />
@@ -129,6 +173,7 @@
           <Property Name="cevapResim" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="soruID" Type="Int32" />
           <NavigationProperty Name="Sorular" Relationship="Self.FK_Cevaplar_Sorular" FromRole="Cevaplar" ToRole="Sorular" />
+          <NavigationProperty Name="Kullanicis" Relationship="Self.FK_Kullanici_Cevaplar" FromRole="Cevaplar" ToRole="Kullanici" />
         </EntityType>
         <EntityType Name="iletisim">
           <Key>
@@ -151,6 +196,19 @@
           <Property Name="kategoriResim" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sorulars" Relationship="Self.FK_Sorular_Kategori" FromRole="Kategori" ToRole="Sorular" />
         </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciID" />
+          </Key>
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAd" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciPW" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="soruID" Type="Int32" />
+          <Property Name="cevapID" Type="Int32" />
+          <NavigationProperty Name="Cevaplar" Relationship="Self.FK_Kullanici_Cevaplar" FromRole="Kullanici" ToRole="Cevaplar" />
+          <NavigationProperty Name="Sorular" Relationship="Self.FK_Kullanici_Sorular" FromRole="Kullanici" ToRole="Sorular" />
+        </EntityType>
         <EntityType Name="Sorular">
           <Key>
             <PropertyRef Name="soruID" />
@@ -166,6 +224,7 @@
           <Property Name="kategoriID" Type="Int32" />
           <NavigationProperty Name="Cevaplars" Relationship="Self.FK_Cevaplar_Sorular" FromRole="Sorular" ToRole="Cevaplar" />
           <NavigationProperty Name="Kategori" Relationship="Self.FK_Sorular_Kategori" FromRole="Sorular" ToRole="Kategori" />
+          <NavigationProperty Name="Kullanicis" Relationship="Self.FK_Kullanici_Sorular" FromRole="Sorular" ToRole="Kullanici" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -198,6 +257,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Kullanici_Cevaplar">
+          <End Role="Cevaplar" Type="Self.Cevaplar" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cevaplar">
+              <PropertyRef Name="cevapID" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="cevapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sorular_Kategori">
           <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
           <End Role="Sorular" Type="Self.Sorular" Multiplicity="*" />
@@ -210,10 +281,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="siteDbEFW" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Kullanici_Sorular">
+          <End Role="Sorular" Type="Self.Sorular" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sorular">
+              <PropertyRef Name="soruID" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="soruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="siteDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cevaplars" EntityType="Self.Cevaplar" />
           <EntitySet Name="iletisims" EntityType="Self.iletisim" />
           <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+          <EntitySet Name="Kullanicis" EntityType="Self.Kullanici" />
           <EntitySet Name="Sorulars" EntityType="Self.Sorular" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Yoneticis" EntityType="Self.Yonetici" />
@@ -221,9 +305,17 @@
             <End Role="Sorular" EntitySet="Sorulars" />
             <End Role="Cevaplar" EntitySet="Cevaplars" />
           </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Cevaplar" Association="Self.FK_Kullanici_Cevaplar">
+            <End Role="Cevaplar" EntitySet="Cevaplars" />
+            <End Role="Kullanici" EntitySet="Kullanicis" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sorular_Kategori" Association="Self.FK_Sorular_Kategori">
             <End Role="Kategori" EntitySet="Kategoris" />
             <End Role="Sorular" EntitySet="Sorulars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Sorular" Association="Self.FK_Kullanici_Sorular">
+            <End Role="Sorular" EntitySet="Sorulars" />
+            <End Role="Kullanici" EntitySet="Kullanicis" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -231,7 +323,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="siteDBModelStoreContainer" CdmEntityContainer="siteDbEFW">
+        <EntityContainerMapping StorageEntityContainer="siteDBModelStoreContainer" CdmEntityContainer="siteDBEntities1">
           <EntitySetMapping Name="Cevaplars">
             <EntityTypeMapping TypeName="siteDBModel.Cevaplar">
               <MappingFragment StoreEntitySet="Cevaplar">
@@ -265,6 +357,18 @@
                 <ScalarProperty Name="kategoriSira" ColumnName="kategoriSira" />
                 <ScalarProperty Name="kategoriAdet" ColumnName="kategoriAdet" />
                 <ScalarProperty Name="kategoriResim" ColumnName="kategoriResim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicis">
+            <EntityTypeMapping TypeName="siteDBModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+                <ScalarProperty Name="KullaniciMail" ColumnName="KullaniciMail" />
+                <ScalarProperty Name="KullaniciPW" ColumnName="KullaniciPW" />
+                <ScalarProperty Name="soruID" ColumnName="soruID" />
+                <ScalarProperty Name="cevapID" ColumnName="cevapID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

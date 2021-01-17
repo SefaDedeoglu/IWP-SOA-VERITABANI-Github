@@ -28,10 +28,18 @@
                 <h1 class="fonts-style">SolveMe</h1>
 
                 <ul>
-                    <li><a href="/deneme/index">Home</a></li>
-                    <li><a href="/deneme/sorular">Tyt</a></li>
-                    <li><a href="/deneme/Aytsorular">Ayt</a></li>
-                    <li><a href="/deneme/login">Login </a></li>
+                    <li><a href="/deneme/deneme/index">Home</a></li>
+                    <li><a href="/deneme/deneme/sorular">Tyt</a></li>
+                    <li><a href="/deneme/deneme/Aytsorular">Ayt</a></li>
+                    @if (Session["KullanıcıAdı"] != null)
+                    {
+                        <li><a href="/deneme/deneme/quit">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/deneme/deneme/login">Login </a></li>
+
+                    }
 
                 </ul>
             </nav>
@@ -53,35 +61,35 @@
         {
             if (item.kategoriID.Equals(2))
             {
-                <div class="row" id="container">
-                    <div class="spacebw">
-                        @if (item.soruResim != null)
-                        {
-                            <img src="~/images/@item.soruResim" class="img-thumbnail">
-                            <textarea class="lableforngr" disabled>@Html.DisplayFor(modelItem => item.soruOzet) </textarea>
-                        }
-                        else
-                        {
-                            <textarea class="lableforngr1" disabled>@Html.DisplayFor(modelItem => item.soruOzet) </textarea>
-                        }
+        <div class="row" id="container">
+            <div class="spacebw">
+
+                @if (item.soruResim != null)
+                {
+                    <img src="~/images/@item.soruResim" class="img-thumbnail">
+                    <textarea class="lableforngr" disabled>@Html.DisplayFor(modelItem => item.soruOzet) </textarea>
+                }
+                else
+                {
+                    <textarea class="lableforngr1" disabled>@Html.DisplayFor(modelItem => item.soruOzet) </textarea>
+                }
 
 
 
-                        <div>
-                            <ul>
-                                <li>cevap sayısı:@Html.DisplayFor(modelItem => item.soruCevapSayisi)</li>
-                                <hr />
-                                <li>okunma sayısı:@Html.DisplayFor(modelItem => item.soruGorunme)</li>
-                                <hr />
-                                <li><button id="btnoval" class="btn btn-success">soruya git</button></li>
+                <div>
+                    <ul>
+                        <li>cevap sayısı:@Html.DisplayFor(modelItem => item.soruCevapSayisi)</li>
+                        
+                        <hr />
+                        <li><button id="btnoval" onclick="window.location.href='/deneme/deneme/soru/@item.soruID'" class="btn btn-success">soruya git</button></li>
 
-                            </ul>
-                        </div>
-
-                    </div>
-
+                    </ul>
                 </div>
-                <hr />
+
+            </div>
+            <hr />
+        </div>
+                
             }
 
         }

@@ -13,10 +13,10 @@ namespace IWP_SOA_VERITABANI.SqlModel
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class siteDbEFW : DbContext
+    public partial class siteDBEntities1 : DbContext
     {
-        public siteDbEFW()
-            : base("name=siteDbEFW")
+        public siteDBEntities1()
+            : base("name=siteDBEntities1")
         {
         }
     
@@ -28,6 +28,7 @@ namespace IWP_SOA_VERITABANI.SqlModel
         public virtual DbSet<Cevaplar> Cevaplars { get; set; }
         public virtual DbSet<iletisim> iletisims { get; set; }
         public virtual DbSet<Kategori> Kategoris { get; set; }
+        public virtual DbSet<Kullanici> Kullanicis { get; set; }
         public virtual DbSet<Sorular> Sorulars { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Yonetici> Yoneticis { get; set; }

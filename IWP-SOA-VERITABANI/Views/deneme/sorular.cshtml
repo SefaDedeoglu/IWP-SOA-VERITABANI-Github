@@ -28,10 +28,18 @@
                 <h1 class="fonts-style">SolveMe</h1>
 
                 <ul>
-                    <li><a href="/deneme/index">Home</a></li>
-                    <li><a href="/deneme/sorular">Tyt</a></li>
-                    <li><a href="/deneme/Aytsorular">Ayt</a></li>
-                    <li><a href="/deneme/login">Login </a></li>
+                    <li><a href="/deneme/deneme/index">Home</a></li>
+                    <li><a href="/deneme/deneme/sorular">Tyt</a></li>
+                    <li><a href="/deneme/deneme/Aytsorular">Ayt</a></li>
+                    @if (Session["KullanıcıAdı"] != null)
+                    {
+                        <li><a href="/deneme/deneme/quit">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/deneme/deneme/login">Login </a></li>
+
+                    }
 
                 </ul>
             </nav>
@@ -71,9 +79,7 @@
                             <ul>
                                 <li>cevap sayısı:@Html.DisplayFor(modelItem => item.soruCevapSayisi)</li>
                                 <hr />
-                                <li>okunma sayısı:@Html.DisplayFor(modelItem => item.soruGorunme)</li>
-                                <hr />
-                                <li><button id="btnoval" class="btn btn-success">soruya git</button></li>
+                                <li><button id="btnoval" onclick="window.location.href='/deneme/deneme/soru/@item.soruID'" class="btn btn-success">soruya git</button></li>
 
                             </ul>
                         </div>

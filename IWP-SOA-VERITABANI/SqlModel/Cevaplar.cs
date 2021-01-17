@@ -14,6 +14,12 @@ namespace IWP_SOA_VERITABANI.SqlModel
     
     public partial class Cevaplar
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cevaplar()
+        {
+            this.Kullanicis = new HashSet<Kullanici>();
+        }
+    
         public int cevapID { get; set; }
         public string cevapAdSoyad { get; set; }
         public string cevapMail { get; set; }
@@ -24,5 +30,7 @@ namespace IWP_SOA_VERITABANI.SqlModel
         public Nullable<int> soruID { get; set; }
     
         public virtual Sorular Sorular { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kullanici> Kullanicis { get; set; }
     }
 }

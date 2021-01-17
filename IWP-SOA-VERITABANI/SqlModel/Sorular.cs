@@ -11,14 +11,14 @@ namespace IWP_SOA_VERITABANI.SqlModel
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Web;
+    
     public partial class Sorular
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sorular()
         {
             this.Cevaplars = new HashSet<Cevaplar>();
+            this.Kullanicis = new HashSet<Kullanici>();
         }
     
         public int soruID { get; set; }
@@ -34,6 +34,7 @@ namespace IWP_SOA_VERITABANI.SqlModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cevaplar> Cevaplars { get; set; }
         public virtual Kategori Kategori { get; set; }
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kullanici> Kullanicis { get; set; }
     }
 }
