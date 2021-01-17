@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="siteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cevaplar">
+          <Key>
+            <PropertyRef Name="cevapID" />
+          </Key>
+          <Property Name="cevapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cevapAdSoyad" Type="nvarchar" MaxLength="500" />
+          <Property Name="cevapMail" Type="nvarchar" MaxLength="500" />
+          <Property Name="cevapIcerik" Type="nvarchar(max)" />
+          <Property Name="cevapTarih" Type="datetime" />
+          <Property Name="cevapOnay" Type="bit" />
+          <Property Name="cevapResim" Type="nvarchar" MaxLength="500" />
+          <Property Name="soruID" Type="int" />
+        </EntityType>
+        <EntityType Name="iletisim">
+          <Key>
+            <PropertyRef Name="iletisimID" />
+          </Key>
+          <Property Name="iletisimID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iletisimAdSoyad" Type="nvarchar" MaxLength="500" />
+          <Property Name="iletisimMail" Type="nvarchar" MaxLength="500" />
+          <Property Name="iletisimIcerik" Type="nvarchar(max)" />
+          <Property Name="iletisimTarih" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriID" />
+          </Key>
+          <Property Name="kategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAd" Type="nvarchar" MaxLength="500" />
+          <Property Name="kategoriSira" Type="int" />
+          <Property Name="kategoriAdet" Type="int" />
+          <Property Name="kategoriResim" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Sorular">
+          <Key>
+            <PropertyRef Name="soruID" />
+          </Key>
+          <Property Name="soruID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="soruBaslik" Type="nvarchar" MaxLength="500" />
+          <Property Name="soruOzet" Type="nvarchar(max)" />
+          <Property Name="soruIcerik" Type="nvarchar(max)" />
+          <Property Name="soruResim" Type="nvarchar(max)" />
+          <Property Name="soruTarih" Type="datetime" />
+          <Property Name="soruGorunme" Type="int" />
+          <Property Name="soruCevapSayisi" Type="int" />
+          <Property Name="kategoriID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="yoneticiID" />
+          </Key>
+          <Property Name="yoneticiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yoneticiAdSoyad" Type="nvarchar" MaxLength="500" />
+          <Property Name="yoneticiKullaniciAd" Type="nvarchar" MaxLength="500" />
+          <Property Name="yoneticiSifre" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_Cevaplar_Sorular">
+          <End Role="Sorular" Type="Self.Sorular" Multiplicity="0..1" />
+          <End Role="Cevaplar" Type="Self.Cevaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sorular">
+              <PropertyRef Name="soruID" />
+            </Principal>
+            <Dependent Role="Cevaplar">
+              <PropertyRef Name="soruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sorular_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Sorular" Type="Self.Sorular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriID" />
+            </Principal>
+            <Dependent Role="Sorular">
+              <PropertyRef Name="kategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="siteDBModelStoreContainer">
+          <EntitySet Name="Cevaplar" EntityType="Self.Cevaplar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iletisim" EntityType="Self.iletisim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sorular" EntityType="Self.Sorular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cevaplar_Sorular" Association="Self.FK_Cevaplar_Sorular">
+            <End Role="Sorular" EntitySet="Sorular" />
+            <End Role="Cevaplar" EntitySet="Cevaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sorular_Kategori" Association="Self.FK_Sorular_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Sorular" EntitySet="Sorular" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="siteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cevaplar">
+          <Key>
+            <PropertyRef Name="cevapID" />
+          </Key>
+          <Property Name="cevapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cevapAdSoyad" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="cevapMail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="cevapIcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cevapTarih" Type="DateTime" Precision="3" />
+          <Property Name="cevapOnay" Type="Boolean" />
+          <Property Name="cevapResim" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="soruID" Type="Int32" />
+          <NavigationProperty Name="Sorular" Relationship="Self.FK_Cevaplar_Sorular" FromRole="Cevaplar" ToRole="Sorular" />
+        </EntityType>
+        <EntityType Name="iletisim">
+          <Key>
+            <PropertyRef Name="iletisimID" />
+          </Key>
+          <Property Name="iletisimID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iletisimAdSoyad" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="iletisimMail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="iletisimIcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="iletisimTarih" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriID" />
+          </Key>
+          <Property Name="kategoriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="kategoriSira" Type="Int32" />
+          <Property Name="kategoriAdet" Type="Int32" />
+          <Property Name="kategoriResim" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sorulars" Relationship="Self.FK_Sorular_Kategori" FromRole="Kategori" ToRole="Sorular" />
+        </EntityType>
+        <EntityType Name="Sorular">
+          <Key>
+            <PropertyRef Name="soruID" />
+          </Key>
+          <Property Name="soruID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="soruBaslik" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="soruOzet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="soruIcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="soruResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="soruTarih" Type="DateTime" Precision="3" />
+          <Property Name="soruGorunme" Type="Int32" />
+          <Property Name="soruCevapSayisi" Type="Int32" />
+          <Property Name="kategoriID" Type="Int32" />
+          <NavigationProperty Name="Cevaplars" Relationship="Self.FK_Cevaplar_Sorular" FromRole="Sorular" ToRole="Cevaplar" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Sorular_Kategori" FromRole="Sorular" ToRole="Kategori" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="yoneticiID" />
+          </Key>
+          <Property Name="yoneticiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yoneticiAdSoyad" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="yoneticiKullaniciAd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="yoneticiSifre" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Cevaplar_Sorular">
+          <End Role="Sorular" Type="Self.Sorular" Multiplicity="0..1" />
+          <End Role="Cevaplar" Type="Self.Cevaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sorular">
+              <PropertyRef Name="soruID" />
+            </Principal>
+            <Dependent Role="Cevaplar">
+              <PropertyRef Name="soruID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sorular_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Sorular" Type="Self.Sorular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriID" />
+            </Principal>
+            <Dependent Role="Sorular">
+              <PropertyRef Name="kategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="siteDbEFW" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cevaplars" EntityType="Self.Cevaplar" />
+          <EntitySet Name="iletisims" EntityType="Self.iletisim" />
+          <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+          <EntitySet Name="Sorulars" EntityType="Self.Sorular" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Yoneticis" EntityType="Self.Yonetici" />
+          <AssociationSet Name="FK_Cevaplar_Sorular" Association="Self.FK_Cevaplar_Sorular">
+            <End Role="Sorular" EntitySet="Sorulars" />
+            <End Role="Cevaplar" EntitySet="Cevaplars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sorular_Kategori" Association="Self.FK_Sorular_Kategori">
+            <End Role="Kategori" EntitySet="Kategoris" />
+            <End Role="Sorular" EntitySet="Sorulars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="siteDBModelStoreContainer" CdmEntityContainer="siteDbEFW">
+          <EntitySetMapping Name="Cevaplars">
+            <EntityTypeMapping TypeName="siteDBModel.Cevaplar">
+              <MappingFragment StoreEntitySet="Cevaplar">
+                <ScalarProperty Name="cevapID" ColumnName="cevapID" />
+                <ScalarProperty Name="cevapAdSoyad" ColumnName="cevapAdSoyad" />
+                <ScalarProperty Name="cevapMail" ColumnName="cevapMail" />
+                <ScalarProperty Name="cevapIcerik" ColumnName="cevapIcerik" />
+                <ScalarProperty Name="cevapTarih" ColumnName="cevapTarih" />
+                <ScalarProperty Name="cevapOnay" ColumnName="cevapOnay" />
+                <ScalarProperty Name="cevapResim" ColumnName="cevapResim" />
+                <ScalarProperty Name="soruID" ColumnName="soruID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iletisims">
+            <EntityTypeMapping TypeName="siteDBModel.iletisim">
+              <MappingFragment StoreEntitySet="iletisim">
+                <ScalarProperty Name="iletisimID" ColumnName="iletisimID" />
+                <ScalarProperty Name="iletisimAdSoyad" ColumnName="iletisimAdSoyad" />
+                <ScalarProperty Name="iletisimMail" ColumnName="iletisimMail" />
+                <ScalarProperty Name="iletisimIcerik" ColumnName="iletisimIcerik" />
+                <ScalarProperty Name="iletisimTarih" ColumnName="iletisimTarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoris">
+            <EntityTypeMapping TypeName="siteDBModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+                <ScalarProperty Name="kategoriSira" ColumnName="kategoriSira" />
+                <ScalarProperty Name="kategoriAdet" ColumnName="kategoriAdet" />
+                <ScalarProperty Name="kategoriResim" ColumnName="kategoriResim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sorulars">
+            <EntityTypeMapping TypeName="siteDBModel.Sorular">
+              <MappingFragment StoreEntitySet="Sorular">
+                <ScalarProperty Name="soruID" ColumnName="soruID" />
+                <ScalarProperty Name="soruBaslik" ColumnName="soruBaslik" />
+                <ScalarProperty Name="soruOzet" ColumnName="soruOzet" />
+                <ScalarProperty Name="soruIcerik" ColumnName="soruIcerik" />
+                <ScalarProperty Name="soruResim" ColumnName="soruResim" />
+                <ScalarProperty Name="soruTarih" ColumnName="soruTarih" />
+                <ScalarProperty Name="soruGorunme" ColumnName="soruGorunme" />
+                <ScalarProperty Name="soruCevapSayisi" ColumnName="soruCevapSayisi" />
+                <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="siteDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yoneticis">
+            <EntityTypeMapping TypeName="siteDBModel.Yonetici">
+              <MappingFragment StoreEntitySet="Yonetici">
+                <ScalarProperty Name="yoneticiID" ColumnName="yoneticiID" />
+                <ScalarProperty Name="yoneticiAdSoyad" ColumnName="yoneticiAdSoyad" />
+                <ScalarProperty Name="yoneticiKullaniciAd" ColumnName="yoneticiKullaniciAd" />
+                <ScalarProperty Name="yoneticiSifre" ColumnName="yoneticiSifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

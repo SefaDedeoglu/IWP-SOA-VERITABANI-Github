@@ -1,0 +1,148 @@
+﻿*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+a{
+    text-decoration: none;
+    color: #ffff;
+}
+
+
+#navbar {
+    color: #ffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.75rem;
+    height: 70px;
+}
+
+    #navbar ul {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+    }
+
+        #navbar ul li a {
+            padding: 1rem;
+        }
+
+            #navbar ul li a:hover {
+                background-color: #999966;
+                border-radius: 4px;
+            }
+/* home */
+#home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    padding-top:5.2rem;
+    background-color: #cc9900;
+    height: 15rem;
+}
+
+    #home img {
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        width: 700px;
+        height: 150px;
+    }
+
+
+#soru-akıs {
+    background-color: #29303B;
+    color: #ffff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    #soru-akıs .sorular {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width:70%;
+    }
+
+        #soru-akıs .sorular .soru {
+            
+           
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+.form-group {
+    padding: 2rem;
+    border-bottom: 1px solid grey;
+}
+
+.pb-cmnt-container {
+    font-family: Lato;
+    margin-top: 100px;
+    margin-left: 500px;
+    text-align: center;
+    justify-content: center;
+}
+
+.pb-cmnt-textarea {
+    resize: none;
+    padding: 20px;
+    height: 130px;
+    width: 100%;
+    border: 1px solid #F2F2F2;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.heading-small {
+    font-size: 1.25rem;
+}
+
+.heading-medium {
+    font-size: 1.5rem;
+}
+
+.heading-big {
+    font-size: 1.75rem;
+}
+
+
+.bg-gri {
+    background: #29303B;
+    position:absolute;
+    width:100%;
+    top:0px;
+}
+
+.fonts-style {
+    font-family: "Yeon Sung",sans-serif;
+}
+
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#dropdown{
+    width:10rem;
+    height:3rem;
+}
+#inputgrp {
+    display: flex;
+    justify-content: space-between;
+}
+
+.customfile{
+    background-color:green;
+}

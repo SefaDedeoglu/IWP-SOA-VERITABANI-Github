@@ -1,0 +1,189 @@
+﻿@{
+
+    RenderBody();
+
+}
+@model IEnumerable<IWP_SOA_VERITABANI.SqlModel.Sorular>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+    <title>Soru Çözümü</title>
+    <meta name="keywords" content="Matematik,Fizik,Kimya">
+    <meta name="description" content="Soru Çözümü">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2? family = Yeon + Sung & display = swap" rel="stil sayfası">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="~/Content/main.css">
+    <link rel="stylesheet" media="(max-width:500px)" href="~/Content/mobilemain.css">
+    <link rel="stylesheet" media="(max-widt:768px)" href="css/tablet.css">
+    <link rel="stylesheet" href="~/Content/Aytsorular.css" />
+
+
+
+
+</head>
+<body style="background-color:#29303B;">
+
+
+    <header class="bg-gri">
+        <div class="container">
+            <nav id="navbar">
+                <h1 class="fonts-style">SolveMe</h1>
+
+                <ul>
+                    <li><a href="/deneme/index">Home</a></li>
+                    <li><a href="/deneme/sorular">Tyt</a></li>
+                    <li><a href="/deneme/Aytsorular">Ayt</a></li>
+                    <li><a href="/deneme/login">Login </a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+
+        <img src="~/images/Solve.gif" style="padding-top:10px;">
+
+    </section>
+
+
+    <section id="soru-akıs">
+        
+        <div class="sorular">
+            <article class="soru">
+                <i class="fas fa-question"></i>
+                <h3>Son sorulan tyt sorusu</h3>
+                @{
+                    var id = 1; ;
+                    foreach (var item in Model)
+                    {
+                        if (item.kategoriID.Equals(1))
+                        {
+                            id = item.soruID;
+                        }
+
+                    }
+
+                    foreach (var item in Model)
+                    {
+                        if (id == item.soruID)
+                        {
+                            <textarea class="lableforngr" disabled>@Html.DisplayFor(modelItem => item.soruOzet) </textarea>
+                            <button id="btnoval" class="btn btn-success">soruya git</button>
+                        }
+                    }
+                }
+
+
+
+
+
+
+            </article>
+            <article class="soru">
+                <i class="fas fa-question"></i>
+                <h3>Son sorulan ayt sorusu</h3>
+                @{
+                    var id1 = 1; ;
+                    foreach (var item in Model)
+                    {
+                        if (item.kategoriID.Equals(2))
+                        {
+                            id1 = item.soruID;
+                        }
+
+                    }
+
+                    foreach (var item in Model)
+                    {
+                        if (id1 == item.soruID)
+                        {
+                            <textarea class="lableforngr" disabled>@Html.DisplayFor(modelItem => item.soruOzet) </textarea>
+                            <button id="btnoval" onclick="window.location.href='/deneme/soru/@item.soruID'" class="btn btn-success">soruya git</button>
+                        }
+                    }
+                }
+
+            </article>
+        </div>
+    </section>
+    <div style="width:100%;height:2px;background-color:white;"></div>
+    <div class="textmain" style="text-align:center;padding-bottom:2rem;padding-top:2rem;">
+        <h2 style="color:white;"> Soru eklemek için aşağıdaki formu kullanabilirsiniz . </h2>
+    </div>
+
+
+
+    @using (Html.BeginForm("Add", "deneme", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <textarea name="textInput" placeholder="Write your comment here!" class="pb-cmnt-textarea" required></textarea>
+        <div id="inputgrp">
+            <div class="inputgrp">
+                <input type="file" name="img" />
+            </div>
+            <select class="form-control" name="Bolum" required>
+                <option disabled>TYT/AYT seçiniz</option>
+                <option value="TYT">TYT</option>
+                <option value="AYT">AYT</option>
+            </select>
+
+
+            <button class="btn btn-primary pull-right" type="submit">Gönder</button>
+        </div>
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

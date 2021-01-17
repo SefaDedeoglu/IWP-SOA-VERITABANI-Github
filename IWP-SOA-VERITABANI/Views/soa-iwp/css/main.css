@@ -1,0 +1,104 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+}
+
+
+a{
+    text-decoration: none;
+    color: #ffff;
+
+}
+
+
+#navbar{
+    color: #ffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.75rem;
+    height: 70px;
+}
+#navbar ul{
+   list-style-type: none;
+   display: flex;
+   align-items: center;
+
+}
+
+#navbar ul li a{
+    padding: 1rem;
+}
+#navbar ul li a:hover{
+    background-color:#999966;
+    border-radius: 4px;
+}
+/* home */
+#home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px solid grey;
+    background-color: #cc9900 ;
+    height: 15rem;
+
+
+}
+
+#home img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 10rem;
+    text-align: center;
+}
+
+
+#soru-akıs {
+    background-color: #29303B;
+    color:#ffff ;
+    padding: 1rem;
+
+}
+
+#soru-akıs .sorular{
+   display: flex; 
+   justify-content: space-between;
+   align-items: center;
+
+}
+
+#soru-akıs .sorular .soru{
+    width: 50½;
+    text-align: center;
+    padding: 0.5rem;
+
+}
+
+.form-group{
+    padding: 2rem;
+    border-bottom: 1px solid grey;
+    
+}
+
+.pb-cmnt-container {
+    font-family: Lato;
+    margin-top: 100px;
+    margin-left: 500px;
+    text-align: center;
+    justify-content: center;
+}
+
+.pb-cmnt-textarea {
+    resize: none;
+    padding: 20px;
+    height: 130px;
+    width: 100%;
+    border: 1px solid #F2F2F2;
+}
+
+

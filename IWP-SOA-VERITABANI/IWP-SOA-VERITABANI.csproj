@@ -96,6 +96,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
@@ -175,17 +176,56 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\denemeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SorularsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlModel\Cevaplar.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\iletisim.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\Kategori.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\Sorular.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\SqlModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\SqlModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\SqlModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\sysdiagram.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel\Yonetici.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Aytsorular.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loginMain.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\mobilemain.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -204,6 +244,33 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SqlModel\SqlModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+      <LastGenOutput>SqlModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SqlModel\SqlModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+      <LastGenOutput>SqlModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\soa-iwp\css\global.css" />
+    <Content Include="Views\soa-iwp\css\login.css" />
+    <Content Include="Views\soa-iwp\css\main.css" />
+    <Content Include="Views\soa-iwp\css\mobile.css" />
+    <Content Include="Views\soa-iwp\css\soru.css" />
+    <Content Include="Views\soa-iwp\css\tablet.css" />
+    <Content Include="Views\deneme\Index.cshtml" />
+    <Content Include="Views\deneme\soru.cshtml" />
+    <Content Include="Views\deneme\login.cshtml" />
+    <Content Include="Views\deneme\Add.cshtml" />
+    <Content Include="Views\deneme\sorular.cshtml" />
+    <Content Include="Views\deneme\Aytsorular.cshtml" />
+    <None Include="Views\soa-iwp\index.cshtml" />
+    <Content Include="Views\soa-iwp\js\login.js" />
+    <Content Include="Views\soa-iwp\js\soru.js" />
+    <None Include="Views\soa-iwp\login.cshtml" />
+    <None Include="Views\soa-iwp\soru.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -214,10 +281,24 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <EntityDeploy Include="SqlModel\SqlModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SqlModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="SqlModel\SqlModel.edmx.diagram">
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\Sorulars\Create.cshtml" />
+    <Content Include="Views\Sorulars\Delete.cshtml" />
+    <Content Include="Views\Sorulars\Details.cshtml" />
+    <Content Include="Views\Sorulars\Edit.cshtml" />
+    <Content Include="Views\Sorulars\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +316,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

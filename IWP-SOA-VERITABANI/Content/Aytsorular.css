@@ -1,0 +1,91 @@
+﻿body {
+    
+}
+#container{
+    width:100%;
+ 
+}
+.spacebw {
+    display: flex;
+    justify-content: space-between;
+   width:100%;
+  
+}
+.lableforngr {
+    border-color: mediumpurple;
+    padding: 1rem;
+    color: white;
+    border: solid;
+    width: 70%;
+    height: 100%;
+    overflow-y: hidden !important;
+    background-color: #29303B;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    resize: none;
+}
+.lableforngr1 {
+    border-color: mediumpurple;
+    padding: 1rem;
+    color: white;
+    margin-left: 325px;
+    border: solid;
+    width: 70%;
+    height: 100%;
+    overflow-y: hidden !important;
+    background-color: #29303B;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    resize: none;
+}
+#btnoval {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    background-color:mediumpurple;
+}
+
+
+.img-thumbnail{
+    max-height:200px;
+}
+.container{
+    max-width:90%;
+}
+ul {
+    list-style-type: none;
+}
+
+#totalgrp{
+    margin-top:5rem;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height:25px;
+    background-color: rgba(0, 0, 0, 0);
+    -moz-border-radius: 5px;
+    // Mozilla için ovalleştirme -webkit-border-radius: 5px;
+    // chrome için ovalleştirme border-radius: 5px;
+    // İnternet Explorer için ovalleştirme
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: mediumpurple;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+       
+    }
+
+.inputgrp {
+    background-color: white;
+    max-width:30%;
+}

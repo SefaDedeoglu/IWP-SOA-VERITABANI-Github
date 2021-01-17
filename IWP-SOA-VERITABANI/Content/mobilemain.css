@@ -1,0 +1,37 @@
+﻿#navbar {
+    flex-direction: column;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    overflow: hidden;
+    height: 80px;
+}
+
+#soru-akıs .sorular {
+    flex-direction: column;
+}
+#container{
+    flex-direction:column;
+    float:left;
+}
+#totalgrp {
+    margin-top: 2rem;
+}
+#home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width:100%;
+    background-color: #cc9900;
+    height: 10rem;
+}
+
+    #home img {
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        width: 300px;
+        height: 80px;
+        padding-top:5px;
+    }
+

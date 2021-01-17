@@ -1,0 +1,85 @@
+﻿@model IEnumerable<IWP_SOA_VERITABANI.SqlModel.Sorular>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body style="margin:5px;">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.soruBaslik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.soruOzet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.soruIcerik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.soruResim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.soruTarih)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.soruGorunme)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.soruCevapSayisi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategori.kategoriAd)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soruBaslik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soruOzet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soruIcerik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soruResim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soruTarih)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soruGorunme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soruCevapSayisi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategori.kategoriAd)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.soruID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.soruID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.soruID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,126 @@
+
+@model Tuple< IWP_SOA_VERITABANI.SqlModel.Sorular,IEnumerable<IWP_SOA_VERITABANI.SqlModel.Cevaplar>>
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/soru.css">
+
+    @RenderBody()
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <style>
+
+        .card-inner {
+            margin-left: 4rem;
+            margin-top: 2rem;
+        }
+
+    </style>
+
+</head>
+
+
+
+
+
+
+<body>
+    <div class="container">
+        <h2 class="text-center">Soru</h2>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+
+
+                        @{
+                            if (Model.Item1.soruResim != null)
+                            {
+                                <a href="~/images/@Model.Item1.soruResim"><img src="~/images/@Model.Item1.soruResim" class="img-thumbnail" alt="~/images/@Model.Item1.soruResim" /></a>
+                            }
+
+                            DateTime n = Convert.ToDateTime(DateTime.Now);
+                            DateTime o = Convert.ToDateTime(Model.Item1.soruTarih);
+                            TimeSpan sonuc = n - o;
+                            int a = Convert.ToInt32(sonuc.TotalMinutes);
+                            string text = a.ToString();
+
+
+                            <p class="text-secondary text-center">@text  Dakika önce</p>
+                        }
+
+                    </div>
+                    <div class="col-md-10">
+                        <p>
+                            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
+
+                        </p>
+                        <div class="clearfix"></div>
+                        <p>
+                            @Html.DisplayFor(model => Model.Item1.soruIcerik)
+
+                            @Html.DisplayFor(model => Model.Item1.soruResim)
+
+
+
+
+                        </p>
+                        <p>
+                            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Cevapla</a>
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+
+                @{
+                    foreach (var item in Model.Item2)
+                    {
+                        if (item.soruID.Equals(Model.Item1.soruID))
+                        {
+                            <div class="card card-inner">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="~/images/@item.cevapResim" class="img img-thumbnail" />
+                                            @{
+                                                DateTime nt = Convert.ToDateTime(DateTime.Now);
+                                                DateTime ot = Convert.ToDateTime(Model.Item1.soruTarih);
+                                                TimeSpan sonuct = nt - ot;
+                                                int at = Convert.ToInt32(sonuc.TotalMinutes);
+                                                string textt = a.ToString();
+
+                                                <p class="text-secondary text-center">@textt  Minutes Ago</p>
+                                            }
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p><a href="/@item.cevapMail"><strong>@Html.DisplayFor(model => item.cevapAdSoyad)</strong></a></p>
+                                            <p>@Html.DisplayFor(model=>item.cevapIcerik)</p>
+                                            <p>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    }
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
